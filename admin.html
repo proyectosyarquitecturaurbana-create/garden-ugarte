@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel · Garden Ugarte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="admin">
+  <header class="barra">
+    <div class="contenedor barra__fila">
+      <a href="index.html" class="marca">Garden <span>Ugarte</span> <small>Panel</small></a>
+      <div class="admin__sesion" id="sesion" hidden>
+        <span id="sesion-email"></span>
+        <button class="boton boton--chico boton--claro" id="salir">Salir</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor admin__main">
+    <p class="aviso" id="aviso-demo" hidden>
+      Modo demostración: la base de datos todavía no está conectada. Podés probar el panel, pero los cambios no se guardan.
+    </p>
+
+    <!-- Ingreso -->
+    <section id="vista-login" class="admin__login" hidden>
+      <h1>Ingresar al panel</h1>
+      <form id="form-login" class="formulario">
+        <label>Email <input name="email" type="email" required autocomplete="username"></label>
+        <label>Contraseña <input name="password" type="password" required autocomplete="current-password"></label>
+        <button class="boton" type="submit">Ingresar</button>
+        <p class="formulario__estado" id="login-estado" role="status"></p>
+      </form>
+    </section>
+
+    <!-- Panel -->
+    <section id="vista-panel" hidden>
+      <div class="pestanas" role="tablist">
+        <button role="tab" class="pestana activa" data-pestana="unidades" aria-selected="true">Unidades</button>
+        <button role="tab" class="pestana" data-pestana="bandeja" aria-selected="false">Bandeja <span class="contador" id="contador-no-leidos" hidden></span></button>
+      </div>
+
+      <!-- Unidades -->
+      <div id="pestana-unidades" class="pestana__panel">
+        <div class="seccion__cabecera">
+          <h2>Disponibilidad de unidades</h2>
+          <button class="boton boton--chico" id="nueva-unidad">+ Nueva unidad</button>
+        </div>
+        <p class="ayuda">Cambiá el estado desde la lista: el sitio público se actualiza al instante. Usá “Editar” para cambiar precio, superficies u otros datos.</p>
+        <div class="tabla-envoltura">
+          <table class="tabla" id="tabla-admin">
+            <thead>
+              <tr><th>Unidad</th><th>Piso</th><th>Tipo</th><th>Sup. total</th><th>Precio USD</th><th>Estado</th><th>Actualizado</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bandeja -->
+      <div id="pestana-bandeja" class="pestana__panel" hidden>
+        <div class="seccion__cabecera">
+          <h2>Propuestas y opiniones</h2>
+          <div class="filtros">
+            <label>Mostrar
+              <select id="filtro-bandeja">
+                <option value="todos">Todos</option>
+                <option value="no-leidos">No leídos</option>
+                <option value="consulta">Consultas</option>
+                <option value="propuesta">Propuestas</option>
+                <option value="opinion">Opiniones</option>
+              </select>
+            </label>
+            <button class="boton boton--chico boton--claro" id="exportar">Exportar CSV</button>
+          </div>
+        </div>
+        <ul class="bandeja" id="bandeja"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Editor de unidad -->
+  <dialog id="dialogo-unidad" class="dialogo">
+    <form id="form-unidad" class="formulario" method="dialog">
+      <h2 id="dialogo-titulo">Unidad</h2>
+      <div class="formulario__fila">
+        <label>Código* <input name="codigo" required maxlength="20" placeholder="3B"></label>
+        <label>Piso* <input name="piso" type="number" required min="0" max="99" placeholder="0 = PB"></label>
+      </div>
+      <div class="formulario__fila">
+        <label>Tipo*
+          <select name="tipo" required>
+            <option>monoambiente</option>
+            <option>1 dormitorio</option>
+            <option>2 dormitorios</option>
+            <option>3 dormitorios</option>
+            <option>local comercial</option>
+          </select>
+        </label>
+        <label>Ambientes <input name="ambientes" type="number" min="1" max="10"></label>
+      </div>
+      <div class="formulario__fila">
+        <label>Sup. cubierta (m²) <input name="superficie_cubierta" type="number" step="0.01" min="0"></label>
+        <label>Sup. total (m²) <input name="superficie_total" type="number" step="0.01" min="0"></label>
+      </div>
+      <div class="formulario__fila">
+        <label>Orientación <input name="orientacion" maxlength="60" placeholder="Frente / Norte"></label>
+        <label>Precio USD <input name="precio_usd" type="number" step="1" min="0" placeholder="Vacío = Consultar"></label>
+      </div>
+      <div class="formulario__fila">
+        <label>Estado
+          <select name="estado">
+            <option value="disponible">Disponible</option>
+            <option value="reservada">Reservada</option>
+            <option value="vendida">Vendida</option>
+          </select>
+        </label>
+        <label>Link al plano <input name="plano_url" type="url" maxlength="500"></label>
+      </div>
+      <label>Notas internas <textarea name="notas" rows="2" maxlength="1000"></textarea></label>
+      <p class="formulario__estado" id="unidad-estado" role="status"></p>
+      <div class="dialogo__acciones">
+        <button type="button" class="boton boton--peligro boton--chico" id="borrar-unidad">Borrar</button>
+        <span></span>
+        <button type="button" class="boton boton--claro" id="cancelar-unidad">Cancelar</button>
+        <button type="submit" class="boton" value="guardar">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

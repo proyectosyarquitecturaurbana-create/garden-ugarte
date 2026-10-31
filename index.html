@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Garden Ugarte · Departamentos y monoambientes</title>
+  <meta name="description" content="Garden Ugarte: departamentos, monoambientes y locales en venta. Consultá la disponibilidad de unidades en tiempo real.">
+  <meta property="og:title" content="Garden Ugarte">
+  <meta property="og:description" content="Departamentos, monoambientes y locales. Disponibilidad en tiempo real.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="barra">
+    <div class="contenedor barra__fila">
+      <a href="#inicio" class="marca">Garden <span>Ugarte</span></a>
+      <button class="barra__menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
+      <nav id="nav" class="barra__nav">
+        <a href="#proyecto">El proyecto</a>
+        <a href="#disponibilidad">Disponibilidad</a>
+        <a href="#galeria">Galería</a>
+        <a href="#ubicacion">Ubicación</a>
+        <a href="#contacto" class="boton boton--chico">Consultar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="portada">
+      <div class="contenedor portada__contenido">
+        <p class="sobretitulo">Departamentos · Monoambientes · Locales</p>
+        <h1>Vivir rodeado de verde,<br>en el corazón de Ugarte.</h1>
+        <p class="portada__texto">Un edificio pensado para disfrutar: espacios luminosos, terminaciones de calidad y amenities para toda la familia.</p>
+        <div class="portada__acciones">
+          <a href="#disponibilidad" class="boton">Ver unidades disponibles</a>
+          <a href="#contacto" class="boton boton--claro">Dejar una consulta</a>
+        </div>
+        <dl class="cifras" id="cifras">
+          <div><dt>Unidades</dt><dd data-cifra="total">–</dd></div>
+          <div><dt>Disponibles</dt><dd data-cifra="disponible">–</dd></div>
+          <div><dt>Reservadas</dt><dd data-cifra="reservada">–</dd></div>
+          <div><dt>Vendidas</dt><dd data-cifra="vendida">–</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="proyecto" class="seccion">
+      <div class="contenedor">
+        <p class="sobretitulo">El proyecto</p>
+        <h2>Diseño, luz y espacios verdes</h2>
+        <p class="seccion__intro">Garden Ugarte combina departamentos de 1 y 2 dormitorios, monoambientes y locales comerciales en planta baja. <em>(Texto de ejemplo: reemplazar con la memoria descriptiva del proyecto.)</em></p>
+        <div class="tarjetas">
+          <article class="tarjeta">
+            <h3>Espacios verdes</h3>
+            <p>Jardín común, terrazas y balcones con vegetación pensada para cada estación.</p>
+          </article>
+          <article class="tarjeta">
+            <h3>Amenities</h3>
+            <p>SUM, parrillas, laundry y bicicletero. Completar con los amenities definitivos.</p>
+          </article>
+          <article class="tarjeta">
+            <h3>Terminaciones</h3>
+            <p>Aberturas de aluminio con DVH, pisos de porcelanato y cocinas equipadas.</p>
+          </article>
+          <article class="tarjeta">
+            <h3>Financiación</h3>
+            <p>Anticipo y cuotas en pesos o dólares. Consultá las condiciones vigentes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="disponibilidad" class="seccion seccion--alterna">
+      <div class="contenedor">
+        <div class="seccion__cabecera">
+          <div>
+            <p class="sobretitulo">Disponibilidad</p>
+            <h2>Unidades en venta</h2>
+          </div>
+          <p class="en-vivo" id="en-vivo" hidden><span class="en-vivo__punto"></span>Actualizado en tiempo real</p>
+        </div>
+        <p class="aviso" id="aviso-demo" hidden>Modo demostración: estas unidades son de ejemplo hasta conectar la base de datos.</p>
+
+        <div class="filtros" role="group" aria-label="Filtrar unidades">
+          <label>Tipo
+            <select id="filtro-tipo">
+              <option value="">Todos</option>
+              <option>monoambiente</option>
+              <option>1 dormitorio</option>
+              <option>2 dormitorios</option>
+              <option>3 dormitorios</option>
+              <option>local comercial</option>
+            </select>
+          </label>
+          <label>Estado
+            <select id="filtro-estado">
+              <option value="">Todos</option>
+              <option value="disponible">Disponible</option>
+              <option value="reservada">Reservada</option>
+              <option value="vendida">Vendida</option>
+            </select>
+          </label>
+          <label>Piso
+            <select id="filtro-piso"><option value="">Todos</option></select>
+          </label>
+        </div>
+
+        <div class="tabla-envoltura">
+          <table class="tabla" id="tabla-unidades">
+            <thead>
+              <tr>
+                <th>Unidad</th>
+                <th>Piso</th>
+                <th>Tipo</th>
+                <th>Amb.</th>
+                <th>Sup. cubierta</th>
+                <th>Sup. total</th>
+                <th>Orientación</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody><tr><td colspan="10" class="tabla__vacio">Cargando unidades…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria" class="seccion">
+      <div class="contenedor">
+        <p class="sobretitulo">Galería</p>
+        <h2>Renders y planos</h2>
+        <div class="galeria">
+          <figure class="galeria__item galeria__item--grande"><div class="marcador">Render de fachada</div></figure>
+          <figure class="galeria__item"><div class="marcador">Living comedor</div></figure>
+          <figure class="galeria__item"><div class="marcador">Jardín común</div></figure>
+          <figure class="galeria__item"><div class="marcador">Planta tipo</div></figure>
+          <figure class="galeria__item"><div class="marcador">Amenities</div></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="ubicacion" class="seccion seccion--alterna">
+      <div class="contenedor ubicacion">
+        <div>
+          <p class="sobretitulo">Ubicación</p>
+          <h2>Cerca de todo</h2>
+          <p id="direccion"></p>
+          <ul class="lista">
+            <li>Transporte público a pocas cuadras</li>
+            <li>Comercios, escuelas y espacios verdes en el barrio</li>
+            <li>Accesos rápidos a las principales avenidas</li>
+          </ul>
+        </div>
+        <div class="mapa" id="mapa"><div class="marcador">Mapa</div></div>
+      </div>
+    </section>
+
+    <section id="contacto" class="seccion">
+      <div class="contenedor contacto">
+        <div>
+          <p class="sobretitulo">Contacto</p>
+          <h2>Consultas, propuestas y opiniones</h2>
+          <p>Contanos qué unidad te interesa, hacenos una propuesta o dejanos tu opinión sobre el proyecto. Te respondemos a la brevedad.</p>
+          <p class="contacto__directo" id="contacto-directo"></p>
+        </div>
+        <form id="form-propuesta" class="formulario" novalidate>
+          <div class="formulario__fila">
+            <label>Nombre y apellido*
+              <input name="nombre" required minlength="2" maxlength="120" autocomplete="name">
+            </label>
+            <label>Tipo de mensaje
+              <select name="tipo">
+                <option value="consulta">Consulta</option>
+                <option value="propuesta">Propuesta</option>
+                <option value="opinion">Opinión</option>
+              </select>
+            </label>
+          </div>
+          <div class="formulario__fila">
+            <label>Email
+              <input name="email" type="email" maxlength="200" autocomplete="email">
+            </label>
+            <label>Teléfono
+              <input name="telefono" type="tel" maxlength="40" autocomplete="tel">
+            </label>
+          </div>
+          <label>Unidad de interés
+            <select name="unidad" id="form-unidad"><option value="">Ninguna en particular</option></select>
+          </label>
+          <label>Mensaje*
+            <textarea name="mensaje" rows="5" required minlength="3" maxlength="4000"></textarea>
+          </label>
+          <!-- Campo trampa contra spam: queda oculto para personas -->
+          <label class="oculto" aria-hidden="true">No completar <input name="sitio_web" tabindex="-1" autocomplete="off"></label>
+          <button class="boton" type="submit">Enviar</button>
+          <p class="formulario__estado" id="form-estado" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__fila">
+      <p class="marca">Garden <span>Ugarte</span></p>
+      <p>Las imágenes son ilustrativas. Superficies y precios sujetos a confirmación.</p>
+      <a href="admin.html" class="pie__admin">Administración</a>
+    </div>
+  </footer>
+
+  <a class="whatsapp" id="whatsapp" hidden target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
+
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
