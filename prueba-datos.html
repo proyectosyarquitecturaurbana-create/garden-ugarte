@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prueba de datos — Showroom Ugarte City Gardens</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{--verde:#2D5C32;--disp:#2FA360;--res:#C9A24A;--vend:#B5483C;--crema:#F6F4EE;--tinta:#1E2420;--gris:#6B736D;--linea:#E3E1D9}
+  *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--crema);color:var(--tinta)}
+  main{max-width:960px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:22px;margin:0 0 4px;color:var(--verde)} p.sub{margin:0 0 16px;color:var(--gris);font-size:14px}
+  .estado{padding:12px 14px;border-radius:10px;font-size:14px;margin-bottom:16px;background:#fff;border:1px solid var(--linea)}
+  .estado.ok{border-color:#9FD3B2;background:#EAF6EE} .estado.aviso{border-color:#EBCB7A;background:#FFF4D6}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
+  .kpi{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:12px} .kpi b{display:block;font-size:22px}
+  .kpi span{font-size:12px;color:var(--gris)}
+  .piso{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+  .piso h2{font-size:15px;margin:0 0 8px;display:flex;gap:8px;align-items:baseline} .piso h2 small{color:var(--gris);font-weight:400;font-size:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{border:0;border-radius:999px;padding:6px 10px;font:600 12px inherit;color:#fff;cursor:pointer}
+  .Disponible{background:var(--disp)} .Reservado{background:var(--res)} .Vendido{background:var(--vend)}
+  .desc{font-size:13px;color:var(--gris);margin:0}
+  dialog{border:0;border-radius:14px;padding:20px;max-width:360px;width:calc(100% - 32px)} dialog::backdrop{background:rgba(0,0,0,.35)}
+  dialog h3{margin:0 0 6px} .fila{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--linea);font-size:14px}
+  dialog button{margin-top:14px;width:100%;padding:10px;border:0;border-radius:8px;background:var(--verde);color:#fff;font:600 14px inherit}
+</style>
+</head>
+<body>
+<main>
+  <h1>Prueba de conexión con Google Sheets</h1>
+  <p class="sub">Página interna: muestra lo que el showroom lee de la planilla. Cambiá un estado en el Sheet, esperá unos 5 minutos y recargá.</p>
+  <div id="estado" class="estado">Cargando datos…</div>
+  <div id="kpis" class="kpis"></div>
+  <div id="pisos"></div>
+</main>
+<dialog id="ficha"><div id="fichaCuerpo"></div><button onclick="this.closest('dialog').close()">Cerrar</button></dialog>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/datos.js"></script>
+<script>
+  const usd = n => n == null ? "—" : "USD " + n.toLocaleString("es-AR");
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  Showroom.cargarDatos().then(d => {
+    const e = document.getElementById("estado");
+    const textos = {
+      sheet: ["ok", "Conectado a Google Sheets. Datos leídos ahora."],
+      cache: ["aviso", "Google Sheets no respondió; se muestra la última copia guardada en este navegador."],
+      respaldo: ["aviso", "Google Sheets no respondió; se muestra la copia de respaldo del sitio."]
+    }[d.origen];
+    e.className = "estado " + textos[0]; e.textContent = textos[1] + (d.error ? " (" + d.error + ")" : "");
+    const c = { Disponible: 0, Reservado: 0, Vendido: 0 };
+    d.unidades.forEach(u => c[u.estado]++);
+    document.getElementById("kpis").innerHTML =
+      `<div class="kpi"><b>${d.unidades.length}</b><span>unidades</span></div>` +
+      Object.entries(c).map(([k, v]) => `<div class="kpi"><b style="color:var(--${k.slice(0,4).toLowerCase()})">${v}</b><span>${k}</span></div>`).join("");
+    document.getElementById("pisos").innerHTML = [...d.pisos].reverse().map(p => `
+      <section class="piso"><h2>${esc(p.etiqueta)} <small>${esc(p.titulo)}</small></h2>
+      ${p.unidades.length ? `<div class="chips">${p.unidades.map(u => `<button class="chip ${u.estado}" data-c="${esc(u.codigo)}">${esc(u.codigo)}</button>`).join("")}</div>`
+                          : `<p class="desc">${esc(p.descripcion)}</p>`}</section>`).join("");
+    document.getElementById("pisos").addEventListener("click", ev => {
+      const b = ev.target.closest(".chip"); if (!b) return;
+      const u = d.unidades.find(x => x.codigo === b.dataset.c);
+      const filas = [["Tipo", u.tipo], ["Piso", u.piso], ["Estado", u.estado],
+        ["Precio", u.mostrarPrecio ? usd(u.precio) : "Consultar"], ["Superficie total", u.m2_total + " m²"],
+        ["Cubierta / balcón", `${u.m2_cubiertos} / ${u.m2_balcon} m²`], ["Ambientes", u.ambientes],
+        ["Dormitorios", u.dormitorios], ["Baños", u.banos]]
+        .concat(u.ambientesDetalle.map(a => [a.ambiente, a.m2 != null ? a.m2 + " m²" : "—"]));
+      document.getElementById("fichaCuerpo").innerHTML = `<h3>Unidad ${esc(u.codigo)}</h3>` +
+        filas.map(([k, v]) => `<div class="fila"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join("");
+      document.getElementById("ficha").showModal();
+    });
+  });
+</script>
+</body>
+</html>
