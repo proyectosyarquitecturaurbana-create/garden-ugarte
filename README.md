@@ -36,9 +36,26 @@ python3 -m http.server 8000
 
 y abrir http://localhost:8000/prueba-datos.html: muestra de dónde vienen los datos, el conteo por estado y las unidades de cada piso con su ficha.
 
+## Imágenes
+
+Cuando lleguen los renders, se suben a estas carpetas y se activa el grupo en `imagenes` de `assets/js/config.js`:
+
+```
+assets/img/plantas/pb.webp, 1.webp … 8.webp, t.webp   (mismo encuadre y escala, 2054 × 2375 px)
+assets/img/fachada/dia.webp, noche.webp               (misma cámara)
+assets/img/tipologias/A … D/render-1.webp … render-3.webp
+```
+
+Mientras tanto el sitio dibuja un esquema de cada planta y muestra espacios marcados "pendiente".
+
 ## Estructura
 
 ```
+index.html              Showroom: inicio, plantas, recorrido 360°, menú y QR
+assets/css/showroom.css Estilos (paleta, tipografía, modo noche, responsive)
+assets/js/app.js        Interfaz
+assets/vendor/          Generador de QR (qrcode-generator 1.4.4, MIT)
+assets/img/             Logo de la profesional y, más adelante, renders
 prueba-datos.html       Página interna para verificar la conexión con el Sheet
 assets/js/config.js     Links de las pestañas publicadas
 assets/js/datos.js      Lectura de CSV, normalización y respaldo

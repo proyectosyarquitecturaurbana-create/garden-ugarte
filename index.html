@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" data-modo="dia">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ugarte City Gardens — Showroom Virtual</title>
+<meta name="description" content="Showroom virtual de Ugarte City Gardens, Manuel Ugarte 1536, Belgrano. Recorrido 360°, plantas por piso y disponibilidad de cada unidad.">
+<meta name="theme-color" content="#2D5C32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/showroom.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ===================== BARRA SUPERIOR ===================== -->
+  <header class="barra">
+    <div class="barra-izq">
+      <button class="icono" id="btnQR" aria-label="Compartir con código QR" title="Código QR">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 6h1v1H6zM17 6h1v1h-1zM6 17h1v1H6zM14 14h3v3h-3zM18 18h3v3h-3zM18 14h3M14 18v3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+      <button class="icono" id="btnMenu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu" title="Menú">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <a class="marca" href="#inicio" aria-label="Ugarte City Gardens, inicio">
+        <span class="marca-a">UGARTE</span><span class="marca-b">CITY GARDENS</span>
+      </a>
+    </div>
+
+    <nav class="vistas" aria-label="Secciones principales">
+      <a href="#inicio" data-vista="inicio">Inicio</a>
+      <a href="#plantas" data-vista="plantas">Plantas</a>
+      <a href="#recorrido" data-vista="recorrido">Recorrido 360°</a>
+    </nav>
+
+    <div class="barra-der">
+      <div class="diaNoche" role="group" aria-label="Modo día o noche">
+        <button data-modo="dia" aria-pressed="true" title="Día">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Día</span>
+        </button>
+        <button data-modo="noche" aria-pressed="false" title="Noche">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <span>Noche</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== INICIO ===================== -->
+  <main>
+  <section class="vista" id="vista-inicio" aria-label="Inicio">
+    <div class="hero">
+      <div class="hero-render" id="heroRender">
+        <div class="pendiente"><span id="heroPendiente">Render de fachada · día</span></div>
+      </div>
+      <div class="hero-texto">
+        <p class="sobre">Showroom virtual · Belgrano, CABA</p>
+        <h1 id="heroTitulo">Ugarte City Gardens</h1>
+        <p class="lema" id="heroLema">Creando espacios más allá de los límites</p>
+        <div class="hero-datos" id="heroDatos"></div>
+        <div class="hero-acciones">
+          <a class="btn primario" href="#plantas">Ver plantas y unidades</a>
+          <a class="btn secundario" href="#recorrido">Recorrido 360°</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PLANTAS ===================== -->
+  <section class="vista" id="vista-plantas" aria-label="Plantas por piso">
+    <div class="plantas">
+      <div class="escenario" id="escenario">
+        <div class="escenario-top">
+          <div>
+            <p class="sobre" id="pisoSobre">Piso</p>
+            <h2 id="pisoTitulo">—</h2>
+            <p class="pisoDesc" id="pisoDesc" hidden></p>
+          </div>
+          <div class="filtros" id="filtros" role="group" aria-label="Filtrar unidades">
+            <button data-tipo="" aria-pressed="true">Todas</button>
+            <button data-tipo="Monoambiente" aria-pressed="false">Mono</button>
+            <button data-tipo="1 Dormitorio" aria-pressed="false">1 dorm.</button>
+            <button data-tipo="2 Dormitorios" aria-pressed="false">2 dorm.</button>
+            <label class="soloDisp"><input type="checkbox" id="soloDisp"> Solo disponibles</label>
+          </div>
+        </div>
+
+        <div class="lienzo" id="lienzo" aria-label="Planta del piso. Arrastrá para mover, pellizcá o usá la rueda para hacer zoom.">
+          <div class="lienzo-mov" id="lienzoMov">
+            <svg id="plano" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+
+        <div class="zoom" role="group" aria-label="Zoom de la planta">
+          <button id="zoomMas" aria-label="Acercar">+</button>
+          <button id="zoomMenos" aria-label="Alejar">−</button>
+          <button id="zoomReset" aria-label="Ver planta completa" title="Ver completa">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+        </div>
+
+        <ul class="leyenda" aria-label="Referencias">
+          <li><i class="punto disp"></i>Disponible</li>
+          <li><i class="punto res"></i>Reservado</li>
+          <li><i class="punto vend"></i>Vendido</li>
+        </ul>
+
+        <!-- Vista previa de la unidad -->
+        <aside class="ficha" id="ficha" aria-live="polite" hidden></aside>
+      </div>
+
+      <nav class="riel" id="riel" aria-label="Elegir piso"></nav>
+    </div>
+  </section>
+
+  <!-- ===================== RECORRIDO 360 ===================== -->
+  <section class="vista" id="vista-recorrido" aria-label="Recorrido 360 grados">
+    <div class="recorrido">
+      <div class="recorrido-sel" id="recorridoSel" role="group" aria-label="Elegir recorrido"></div>
+      <div class="recorrido-marco" id="recorridoMarco"></div>
+    </div>
+  </section>
+  </main>
+
+  <!-- ===================== NAVEGACIÓN INFERIOR (CELULAR) ===================== -->
+  <nav class="tabbar" aria-label="Secciones principales">
+    <a href="#inicio" data-vista="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6 8 6v9h-5v-6H9v6H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Inicio</a>
+    <a href="#plantas" data-vista="plantas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM4 12h9M13 4v16" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Plantas</a>
+    <a href="#recorrido" data-vista="recorrido"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="12" rx="8" ry="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>360°</a>
+  </nav>
+
+  <!-- ===================== MENÚ HAMBURGUESA ===================== -->
+  <div class="velo" id="velo" hidden></div>
+  <aside class="menu" id="menu" aria-label="Menú" aria-hidden="true">
+    <div class="menu-cab">
+      <span class="marca"><span class="marca-a">UGARTE</span><span class="marca-b">CITY GARDENS</span></span>
+      <button class="icono" id="cerrarMenu" aria-label="Cerrar menú">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="menu-lista">
+      <button data-seccion="proyecto">El proyecto</button>
+      <button data-seccion="financiacion">Financiación</button>
+      <button data-seccion="renders">Renders</button>
+      <button data-seccion="etapas">Etapas de obra</button>
+      <button data-seccion="superficies">Superficies</button>
+      <button data-seccion="ubicacion">Ubicación</button>
+      <button data-seccion="profesional">Profesional y contacto</button>
+      <button data-seccion="identidad">Paleta y tipografía</button>
+    </nav>
+    <div class="menu-pie" id="menuPie"></div>
+  </aside>
+
+  <!-- ===================== PANEL DE SECCIÓN ===================== -->
+  <dialog class="panel" id="panel" aria-labelledby="panelTitulo">
+    <div class="panel-cab">
+      <h2 id="panelTitulo">—</h2>
+      <button class="icono" data-cerrar aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="panel-cuerpo" id="panelCuerpo"></div>
+  </dialog>
+
+  <!-- ===================== QR ===================== -->
+  <dialog class="panel qr" id="panelQR" aria-labelledby="qrTitulo">
+    <div class="panel-cab">
+      <h2 id="qrTitulo">Compartí el showroom</h2>
+      <button class="icono" data-cerrar aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="panel-cuerpo">
+      <div class="qr-caja" id="qrCaja"></div>
+      <p class="qr-url" id="qrUrl"></p>
+      <div class="qr-acciones">
+        <button class="btn secundario" id="qrCopiar">Copiar link</button>
+        <button class="btn secundario" id="qrPNG">Descargar PNG</button>
+        <button class="btn secundario" id="qrSVG">Descargar SVG</button>
+        <button class="btn primario" id="qrCompartir" hidden>Compartir</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="aviso" id="aviso" role="status" hidden></div>
+</div>
+
+<script src="assets/vendor/qrcode-generator-1.4.4.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/datos.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
