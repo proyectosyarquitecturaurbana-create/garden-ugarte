@@ -78,7 +78,13 @@ main{position:absolute;inset:0}
 .marca-logo{font:800 13px var(--ui);letter-spacing:.22em;color:var(--vidrio-tinta);background:var(--vidrio);border:1px solid var(--vidrio-borde);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:9px 14px;border-radius:10px;box-shadow:var(--sombra-s)}
 .marca-logo em{font-style:normal;font-weight:600;color:var(--disp)}
+.marca-logo{display:flex;align-items:center;padding:8px 14px}
+.marca-logo img{display:block;height:48px;width:auto}
+.marca-logo .logo-noche{display:none}
+:root[data-modo="noche"] .marca-logo:not(.oscuro) .logo-dia{display:none}
+:root[data-modo="noche"] .marca-logo:not(.oscuro) .logo-noche{display:block}
 .marca-logo.oscuro{background:none;border:0;box-shadow:none;padding:0;color:var(--tinta);backdrop-filter:none}
+.marca-logo.oscuro img{height:48px}
 .marca-logo.oscuro em{color:var(--bosque)}
 .marca-tag{font:600 12px var(--ui);color:#fff;background:var(--bosque);padding:5px 11px;border-radius:999px;letter-spacing:.04em}
 .marca-tag:empty{display:none}
@@ -130,8 +136,7 @@ main{position:absolute;inset:0}
   radial-gradient(70% 60% at 50% 45%,rgba(14,23,18,.25),rgba(14,23,18,.82) 100%),
   linear-gradient(180deg,rgba(14,23,18,.55),rgba(14,23,18,0) 30%,rgba(14,23,18,0) 60%,rgba(14,23,18,.9))}
 .inicio{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:96px 20px 170px;gap:14px}
-.rombo{width:46px;height:46px;border:1px solid rgba(255,255,255,.7);transform:rotate(45deg);display:grid;place-items:center;margin-bottom:10px}
-.rombo span{transform:rotate(-45deg);font:700 12px var(--ui);letter-spacing:.12em}
+.inicio-logo{width:clamp(170px,19vw,250px);height:auto;margin-bottom:12px;filter:drop-shadow(0 2px 14px rgba(0,0,0,.55)) drop-shadow(0 0 2px rgba(0,0,0,.35))}
 .inicio-sobre{margin:0;font:600 11.5px var(--ui);letter-spacing:.32em;text-transform:uppercase;color:#CFE3D2}
 .inicio h1{margin:0;font:500 clamp(48px,8.4vw,116px)/.92 var(--titulo);letter-spacing:-.01em;text-wrap:balance}
 .inicio-lema{margin:6px 0 18px;font-size:16px;color:rgba(255,255,255,.78);letter-spacing:.01em}
@@ -377,7 +382,8 @@ main{position:absolute;inset:0}
   .barra-centro{flex:1}
   .segmento button{padding:7px 13px}
   .marca{top:calc(64px + env(safe-area-inset-top,0px))}
-  .marca-logo{font-size:11px;padding:7px 11px}
+  .marca-logo{font-size:11px;padding:6px 10px}
+  .marca-logo img{height:30px}
 
   .inicio{padding:80px 20px 210px}
   .inicio-lema{font-size:15px}
