@@ -27,6 +27,12 @@ window.SHOWROOM_CONFIG = {
   imagenes: { plantas: false, fachada: false, renders: false },
 
   // Puntos de amenities en PB y Terraza (posición en % de la planta).
+  // Recorridos 360° propios (tour.html). Tipología -> id del tour en data/tours/<id>.json.
+  // Si una tipología tiene tour propio, se usa ese; si no, el link de Kuula del Sheet; si no, "Próximamente".
+  tours: {
+    // A: "tipo-a", B: "tipo-b", C: "tipo-c", D: "tipo-d", amenities: "amenities"
+  },
+
   amenities: {
     PB: [
       { nombre: "SUM · 160 m²", x: 32.41, y: 27.46 },

@@ -1,0 +1,39 @@
+{
+  "titulo": "Ejemplo · dos ambientes",
+  "inicio": "living",
+  "transicion": "acercar",
+  "duracion": 900,
+  "autorrotar": -1.5,
+  "esperaRotar": 8000,
+  "entrada": true,
+  "clicEnCualquierLado": true,
+  "plano": { "imagen": "plano.svg" },
+  "escenas": {
+    "living": {
+      "titulo": "Living",
+      "yaw": 20, "pitch": -4, "hfov": 100,
+      "zoom": { "min": 50, "max": 110 },
+      "inclinacion": { "min": -75, "max": 75 },
+      "filtro": { "contraste": 1.04, "saturacion": 1.05, "nitidez": 0.3 },
+      "sol": { "yaw": 8, "pitch": 12, "intensidad": 0.7 },
+      "mapa": { "x": 32, "y": 50 },
+      "puntos": [
+        { "tipo": "paso", "yaw": 72, "pitch": -30, "destino": "dormitorio", "texto": "Dormitorio", "llegada": { "yaw": 108, "pitch": -4 } },
+        { "tipo": "info", "yaw": 0, "pitch": 2, "titulo": "Ventanal", "texto": "Carpintería de aluminio con doble vidriado hermético.", "soloAlPasar": true },
+        { "tipo": "texto", "yaw": -90, "pitch": 10, "texto": "Revestimiento de madera", "color": "#2D5C32" }
+      ]
+    },
+    "dormitorio": {
+      "titulo": "Dormitorio",
+      "yaw": 108, "pitch": -4, "hfov": 100,
+      "zoom": { "min": 50, "max": 110 },
+      "inclinacion": { "min": -75, "max": 75 },
+      "filtro": { "calidez": 0.25, "contraste": 1.03 },
+      "mapa": { "x": 74, "y": 50 },
+      "puntos": [
+        { "tipo": "paso", "yaw": -72, "pitch": -30, "destino": "living", "texto": "Living", "llegada": { "yaw": -108, "pitch": -4 } },
+        { "tipo": "info", "yaw": 0, "pitch": 2, "titulo": "Vista al pulmón de manzana", "texto": "Orientación norte, sol de mañana y tarde.", "soloAlPasar": true, "lado": "abajo" }
+      ]
+    }
+  }
+}

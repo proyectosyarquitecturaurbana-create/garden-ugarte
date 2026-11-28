@@ -1,0 +1,97 @@
+/* Tour 360° propio · Ugarte City Gardens (sobre Pannellum) */
+.t360{position:relative;width:100%;height:100%;overflow:hidden;background:#0E1712;color:#fff;font-family:Manrope,Inter,system-ui,sans-serif;
+  --verde:#2D5C32;--verde-v:#2FA360;--crema:#F6F4EE}
+.t360-visor{position:absolute;inset:0}
+.t360-defs{position:absolute;width:0;height:0;overflow:hidden}
+.t360 .pnlm-container{background:#0E1712;font-family:inherit}
+.t360 .pnlm-load-box{background:rgba(14,23,18,.82);border-radius:14px;width:220px;height:auto;padding:14px 16px;margin:-40px 0 0 -110px;font-family:inherit}
+.t360 .pnlm-load-box p{margin:0 0 10px;font-size:13px;letter-spacing:.06em}
+.t360 .pnlm-lbar{width:100%;border-color:rgba(255,255,255,.4);border-radius:99px;height:4px;margin:0}
+.t360 .pnlm-lbar-fill{background:var(--verde-v);border-radius:99px}
+.t360 .pnlm-lmsg{display:none}
+.t360 .pnlm-about-msg,.t360 .pnlm-panorama-info{display:none!important}
+
+/* ---------- puntos ---------- */
+.t360-hs{width:calc(88px * var(--t,1));height:calc(88px * var(--t,1));opacity:var(--o,1);cursor:pointer;outline:none}
+.t360-paso .t360-anillo{position:absolute;inset:0;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle,rgba(255,255,255,.28) 0 38%,rgba(255,255,255,0) 39%);
+  border:2.5px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.15),0 6px 18px rgba(0,0,0,.35);transition:transform .25s,background .25s}
+.t360-paso.en-piso .t360-anillo{transform:perspective(220px) rotateX(var(--incl,55deg))}
+.t360-flecha{width:46%;height:46%;color:#fff;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.t360-flecha svg{width:100%;height:100%;display:block}
+.t360-paso:hover .t360-anillo,.t360-paso:focus-visible .t360-anillo{background:radial-gradient(circle,rgba(47,163,96,.85) 0 40%,rgba(47,163,96,.25) 41%)}
+.t360-paso.en-piso:hover .t360-anillo{transform:perspective(220px) rotateX(var(--incl,55deg)) scale(1.12)}
+.t360-rotulo{position:absolute;left:50%;top:100%;transform:translate(-50%,6px);white-space:nowrap;font:700 12px/1 Manrope,Inter,sans-serif;letter-spacing:.06em;
+  background:rgba(14,23,18,.72);padding:7px 11px;border-radius:99px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);pointer-events:none;transition:opacity .2s}
+.t360-hs.solo-al-pasar .t360-rotulo{opacity:0}
+.t360-hs.solo-al-pasar:hover .t360-rotulo,.t360-hs.solo-al-pasar:focus-visible .t360-rotulo{opacity:1}
+
+.t360-info{width:calc(34px * var(--t,1));height:calc(34px * var(--t,1))}
+.t360-punto{position:absolute;inset:0;border-radius:50%;background:var(--c,#fff);color:var(--verde);display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.t360-punto svg{width:62%;height:62%}
+.t360-globo{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);width:max-content;max-width:240px;background:var(--f,rgba(246,244,238,.96));color:#1E2420;
+  padding:10px 12px;border-radius:12px;font:500 13px/1.4 Inter,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.3);display:flex;flex-direction:column;gap:2px;pointer-events:none;transition:opacity .2s,transform .2s}
+.t360-globo b{font:700 13px Manrope,Inter,sans-serif;color:var(--verde)}
+.t360-info.globo-abajo .t360-globo{bottom:auto;top:calc(100% + 10px)}
+.t360-info.solo-al-pasar .t360-globo{opacity:0;transform:translate(-50%,4px)}
+.t360-info.solo-al-pasar:hover .t360-globo,.t360-info.solo-al-pasar:focus-visible .t360-globo,.t360-info.abierto .t360-globo{opacity:1;transform:translateX(-50%)}
+
+.t360-texto{width:auto;height:auto;cursor:default}
+.t360-cartel{display:block;white-space:nowrap;color:var(--c,#fff);background:var(--f,transparent);padding:4px 8px;border-radius:6px;font:600 calc(15px * var(--t,1)) Manrope,Inter,sans-serif;letter-spacing:.04em;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+.t360-imagen{width:auto;height:auto;cursor:default}
+.t360-imagen img{display:block;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+
+/* pulso */
+.t360-hs.pulso::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid rgba(255,255,255,.85);animation:t360p 2.2s ease-out infinite;pointer-events:none}
+.t360-paso.en-piso.pulso::after{transform:perspective(220px) rotateX(var(--incl,55deg))}
+@keyframes t360p{0%{opacity:.9;scale:1}100%{opacity:0;scale:1.7}}
+@media (prefers-reduced-motion:reduce){.t360-hs.pulso::after{animation:none;opacity:0}}
+
+/* sol */
+.t360-sol{width:520px;height:520px;pointer-events:none;mix-blend-mode:screen;
+  background:radial-gradient(circle,rgba(255,250,235,calc(1*var(--i))) 0 3%,rgba(255,236,190,calc(.55*var(--i))) 7%,rgba(255,214,150,calc(.18*var(--i))) 22%,rgba(255,200,120,0) 52%)}
+
+/* ---------- interfaz ---------- */
+.t360-ui{position:absolute;inset:0;pointer-events:none}
+.t360-ui > *{pointer-events:auto}
+.t360-cab{position:absolute;left:16px;top:16px}
+.t360-titulo{display:inline-block;font:700 12px Manrope,Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;background:rgba(14,23,18,.62);padding:9px 14px;border-radius:99px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.t360-ctrl{position:absolute;right:16px;top:16px;display:flex;flex-direction:column;gap:8px}
+.t360-b{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(14,23,18,.6);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.t360-b svg{width:18px;height:18px}
+.t360-b[aria-pressed="true"]{background:var(--verde);border-color:var(--verde)}
+.t360-b:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.t360-tira{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:8px;max-width:calc(100% - 32px);overflow-x:auto;padding:6px;border-radius:14px;background:rgba(14,23,18,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);scrollbar-width:none}
+.t360-tira button{flex:none;width:112px;border:2px solid transparent;border-radius:10px;overflow:hidden;padding:0;background:#16211A;color:#fff;cursor:pointer;position:relative;aspect-ratio:16/10}
+.t360-tira img{width:100%;height:100%;object-fit:cover;display:block;opacity:.8}
+.t360-tira span{position:absolute;left:0;right:0;bottom:0;padding:14px 6px 5px;font:700 10.5px Manrope,Inter,sans-serif;letter-spacing:.05em;background:linear-gradient(transparent,rgba(0,0,0,.75));text-align:left}
+.t360-tira button[aria-selected="true"]{border-color:var(--verde-v)}
+.t360-tira button[aria-selected="true"] img{opacity:1}
+.t360-plano{position:absolute;left:16px;bottom:16px;width:190px;background:rgba(246,244,238,.94);border-radius:12px;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.t360-plano img{display:block;width:100%;height:auto;border-radius:6px}
+.t360-pp{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid #fff;background:var(--verde);padding:0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.t360-pp.activo{background:var(--verde-v)}
+.t360-cono{display:none}
+.t360-pp.activo .t360-cono{display:block;position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
+.t360-pp.activo .t360-cono::before{content:"";position:absolute;left:-30px;top:-46px;width:60px;height:46px;
+  background:linear-gradient(to top,rgba(47,163,96,.65),rgba(47,163,96,0));clip-path:polygon(50% 100%,0 0,100% 0)}
+.t360-ayuda{position:absolute;left:50%;top:64px;transform:translateX(-50%);font:600 12px Manrope,Inter,sans-serif;background:rgba(14,23,18,.6);padding:8px 14px;border-radius:99px;transition:opacity .4s;white-space:nowrap;pointer-events:none}
+.t360-ayuda.oculta{opacity:0}
+.t360-tira ~ .t360-plano{bottom:120px}
+/* dentro del panel de la unidad (el sitio ya tiene su barra arriba y el menú de paneles a la derecha) */
+.t360-incrustado .t360-cab{display:none}
+.t360-incrustado .t360-ctrl{left:16px;right:auto;top:180px}
+.t360-incrustado .t360-ayuda{top:auto;bottom:112px}
+@media (max-width:720px){
+  .t360-tira button{width:88px}
+  .t360-plano{width:130px}
+  .t360-tira ~ .t360-plano{bottom:104px}
+  .t360-ayuda{font-size:11px;top:auto;bottom:112px}
+}
+@media (max-width:720px){
+  .t360-incrustado .t360-ctrl{top:auto;bottom:250px;flex-direction:column}
+  .t360-incrustado .t360-plano{display:none}
+  .t360-incrustado .t360-tira{bottom:70px}
+  .t360-incrustado .t360-tira button{width:76px}
+  .t360-incrustado .t360-ayuda{bottom:156px}
+}

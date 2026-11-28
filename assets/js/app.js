@@ -354,7 +354,9 @@
     let h = "";
     switch (S.panel) {
       case "tour":
-        h = t.tour && esKuula(t.tour)
+        h = (CFG.tours || {})[u.tipologia]
+          ? `<div class="panel-u"><iframe src="tour.html?t=${encodeURIComponent(CFG.tours[u.tipologia])}&incrustado=1" title="Tour 360° · ${nom}" allow="gyroscope; accelerometer; fullscreen" allowfullscreen></iframe></div>`
+          : t.tour && esKuula(t.tour)
           ? `<div class="panel-u"><iframe src="${esc(t.tour)}" title="Tour 360° · ${nom}" allow="xr-spatial-tracking; gyroscope; accelerometer; fullscreen" allowfullscreen></iframe></div>`
           : `<div class="panel-u">${prox("Tour 360° · " + nom, "Recorrido virtual", "Estamos terminando las panorámicas de esta tipología. Muy pronto vas a poder recorrerla por dentro.")}</div>`;
         break;
