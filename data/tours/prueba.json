@@ -1,0 +1,33 @@
+{
+  "titulo": "Prueba · monoambiente",
+  "inicio": "estar",
+  "transicion": "acercar",
+  "duracion": 900,
+  "autorrotar": -1.2,
+  "esperaRotar": 9000,
+  "entrada": true,
+  "clicEnCualquierLado": true,
+  "escenas": {
+    "estar": {
+      "titulo": "Estar y cocina",
+      "yaw": 0, "pitch": -6, "hfov": 100,
+      "zoom": { "min": 50, "max": 110 },
+      "inclinacion": { "min": -80, "max": 80 },
+      "filtro": { "contraste": 1.03 },
+      "sol": { "yaw": 47, "pitch": 6, "intensidad": 0.35 },
+      "puntos": [
+        { "tipo": "paso", "yaw": 54, "pitch": -15, "destino": "dormitorio", "texto": "Dormitorio y balcón", "llegada": { "yaw": 115, "pitch": -4, "hfov": 100 } }
+      ]
+    },
+    "dormitorio": {
+      "titulo": "Dormitorio y balcón",
+      "yaw": 60, "pitch": -6, "hfov": 100,
+      "zoom": { "min": 50, "max": 110 },
+      "inclinacion": { "min": -80, "max": 80 },
+      "filtro": { "contraste": 1.03 },
+      "puntos": [
+        { "tipo": "paso", "yaw": -8, "pitch": -17, "destino": "estar", "texto": "Estar y cocina", "llegada": { "yaw": -25, "pitch": -6, "hfov": 100 } }
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recorrido 360° · Ugarte City Gardens</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/pannellum/pannellum.css">
+<link rel="stylesheet" href="assets/css/tour360.css">
+<style>html,body{margin:0;height:100%;background:#0E1712}#tour{position:fixed;inset:0}
+.t360-error{position:fixed;inset:0;display:grid;place-items:center;color:#DDEBD8;font:500 15px Inter,sans-serif;text-align:center;padding:24px}</style>
+</head>
+<body>
+<div id="tour"></div>
+<script src="assets/vendor/pannellum/pannellum.js"></script>
+<script src="assets/js/tour360.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), id = (q.get("t") || "ejemplo").replace(/[^a-z0-9_-]/gi, "");
+  var opc = { base: "assets/tours/" + id + "/" };
+  if (q.get("entrada") === "0") opc.entrada = false;
+  if (q.get("incrustado") === "1") document.getElementById("tour").classList.add("t360-incrustado");
+  Tour360.crear(document.getElementById("tour"), "data/tours/" + id + ".json", opc).then(function (t) { window.__tour = t; }).catch(function (e) {
+    document.getElementById("tour").innerHTML = '<div class="t360-error">El recorrido todavía no está disponible.</div>';
+    console.error(e);
+  });
+})();
+</script>
+</body>
+</html>

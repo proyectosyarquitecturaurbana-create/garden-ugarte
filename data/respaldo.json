@@ -1435,8 +1435,8 @@
   },
   {
    "clave": "entrega_estimada",
-   "valor": "",
-   "nota": "Completar"
+   "valor": "Diciembre 2027",
+   "nota": ""
   },
   {
    "clave": "financiacion_texto",
@@ -1445,13 +1445,13 @@
   },
   {
    "clave": "financiacion_anticipo",
-   "valor": "",
-   "nota": "Ej: 30 %"
+   "valor": "30 %",
+   "nota": ""
   },
   {
    "clave": "financiacion_cuotas",
-   "valor": "",
-   "nota": "Ej: 36 cuotas en pesos ajustadas por CAC"
+   "valor": "36 cuotas en pesos ajustadas por CAC",
+   "nota": ""
   },
   {
    "clave": "etapa_actual",
@@ -1465,8 +1465,8 @@
   },
   {
    "clave": "profesional_bio",
-   "valor": "",
-   "nota": "Completar: texto corto de \"Sobre mí\""
+   "valor": "Arquitecta contemporánea especializada en crear espacios que inspiran.\nSoy Julieta Acuña, arquitecta con formación en diseño contemporáneo y una profunda vocación por crear espacios que respondan tanto a las necesidades funcionales como a las aspiraciones estéticas de cada cliente. Me especializo en diseño residencial, remodelaciones y el desarrollo integral de proyectos desde la primera idea hasta la entrega final.\nMi trabajo se distingue por un enfoque personalizado, donde cada proyecto es único y refleja la identidad y el estilo de vida de quienes habitarán el espacio. Combino rigor técnico con sensibilidad artística para lograr resultados que superan las expectativas.",
+   "nota": ""
   },
   {
    "clave": "whatsapp",
@@ -1480,8 +1480,8 @@
   },
   {
    "clave": "email",
-   "valor": "",
-   "nota": "Completar"
+   "valor": "arq.ac.julieta@gmail.com",
+   "nota": ""
   },
   {
    "clave": "url_sitio",

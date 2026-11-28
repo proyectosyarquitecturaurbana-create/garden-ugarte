@@ -18,5 +18,32 @@ window.SHOWROOM_CONFIG = {
   // Copia local que se usa si Google no responde.
   respaldo: "data/respaldo.json",
   // Segundos de espera antes de pasar al respaldo.
-  tiempoEspera: 8
+  tiempoEspera: 8,
+
+  // Imágenes fijas del sitio. Cuando subas cada grupo, cambiá su false por true.
+  //   plantas:  assets/img/plantas/pb.webp, 1.webp … 8.webp, t.webp (todas con el mismo encuadre)
+  //   fachada:  assets/img/fachada/dia.webp y noche.webp (misma cámara)
+  //   renders:  assets/img/tipologias/A/render-1.webp … render-3.webp (A, B, C y D)
+  imagenes: { plantas: false, fachada: false, renders: false },
+
+  // Puntos de amenities en PB y Terraza (posición en % de la planta).
+  // Recorridos 360° propios (tour.html). Tipología -> id del tour en data/tours/<id>.json.
+  // Si una tipología tiene tour propio, se usa ese; si no, el link de Kuula del Sheet; si no, "Próximamente".
+  tours: {
+    // A: "tipo-a", B: "tipo-b", C: "tipo-c", D: "tipo-d", amenities: "amenities"
+  },
+
+  amenities: {
+    PB: [
+      { nombre: "SUM · 160 m²", x: 32.41, y: 27.46 },
+      { nombre: "Local comercial · 90 m²", x: 24.88, y: 66.17 },
+      { nombre: "Hall de acceso", x: 41.0, y: 65.47 }
+    ],
+    T: [
+      { nombre: "Huerta comunitaria", x: 38.11, y: 28.86 },
+      { nombre: "Vestuario y baños", x: 22.75, y: 60.22 },
+      { nombre: "Solárium y piscina", x: 38.41, y: 67.03 },
+      { nombre: "Vestuario y baños", x: 54.21, y: 60.11 }
+    ]
+  }
 };
