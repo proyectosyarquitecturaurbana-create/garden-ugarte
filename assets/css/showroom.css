@@ -136,9 +136,9 @@ main{position:absolute;inset:0}
   radial-gradient(70% 60% at 50% 45%,rgba(14,23,18,.25),rgba(14,23,18,.82) 100%),
   linear-gradient(180deg,rgba(14,23,18,.55),rgba(14,23,18,0) 30%,rgba(14,23,18,0) 60%,rgba(14,23,18,.9))}
 .inicio{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:96px 20px 170px;gap:14px}
-.inicio-logo{width:clamp(170px,19vw,250px);height:auto;margin-bottom:12px;filter:drop-shadow(0 2px 14px rgba(0,0,0,.55)) drop-shadow(0 0 2px rgba(0,0,0,.35))}
+.inicio-logo{width:clamp(240px,30vw,420px);height:auto;margin-bottom:6px;filter:drop-shadow(0 2px 14px rgba(0,0,0,.55)) drop-shadow(0 0 2px rgba(0,0,0,.35))}
 .inicio-sobre{margin:0;font:600 11.5px var(--ui);letter-spacing:.32em;text-transform:uppercase;color:#CFE3D2}
-.inicio h1{margin:0;font:500 clamp(48px,8.4vw,116px)/.92 var(--titulo);letter-spacing:-.01em;text-wrap:balance}
+.inicio h1{margin:0;font:italic 500 clamp(28px,3.6vw,46px)/1.05 var(--titulo);letter-spacing:.01em;text-wrap:balance}
 .inicio-lema{margin:6px 0 18px;font-size:16px;color:rgba(255,255,255,.78);letter-spacing:.01em}
 .ingresar{display:inline-flex;align-items:center;gap:12px;padding:15px 30px;border-radius:999px;background:#fff;color:var(--tinta);text-decoration:none;
   font:700 13px var(--ui);letter-spacing:.2em;text-transform:uppercase;box-shadow:0 18px 40px -16px rgba(0,0,0,.6);transition:gap .2s,transform .2s}
