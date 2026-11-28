@@ -479,6 +479,7 @@
             ${igUser() ? `<a href="https://www.instagram.com/${esc(igUser())}" target="_blank" rel="noopener">${IC.ig}@${esc(igUser())}</a>` : ""}
             ${p.email ? `<a href="mailto:${esc(p.email)}">${IC.mail}${esc(p.email)}</a>` : ""}
             <div class="firma"><img src="assets/img/logo-julieta-acuna.svg" alt="Julieta Acuña, arquitecta"><div><small>Proyecto a cargo de</small><b>${esc(p.profesional_nombre || "")}</b></div></div>
+            ${p.profesional_bio ? `<div class="sobre-mi"><small>Sobre mí</small>${String(p.profesional_bio).split(/\n\s*\n|\r?\n/).map(x => x.trim()).filter(Boolean).map((x, i) => `<p${i === 0 ? ' class="lema-bio"' : ""}>${esc(x)}</p>`).join("")}</div>` : ""}
           </div>
         </div>`;
     }

@@ -14,7 +14,7 @@
 /* ---------- puntos ---------- */
 .t360-hs{width:calc(88px * var(--t,1));height:calc(88px * var(--t,1));opacity:var(--o,1);cursor:pointer;outline:none}
 .t360-paso .t360-anillo{position:absolute;inset:0;border-radius:50%;display:grid;place-items:center;
-  background:radial-gradient(circle,rgba(255,255,255,.28) 0 38%,rgba(255,255,255,0) 39%);
+  background:radial-gradient(circle,rgba(14,23,18,.45) 0 40%,rgba(14,23,18,.16) 41%);
   border:2.5px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.15),0 6px 18px rgba(0,0,0,.35);transition:transform .25s,background .25s}
 .t360-paso.en-piso .t360-anillo{transform:perspective(220px) rotateX(var(--incl,55deg))}
 .t360-flecha{width:46%;height:46%;color:#fff;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
